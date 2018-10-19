@@ -15,6 +15,9 @@ class CreateAlfajorTable extends Migration
     {
         Schema::create('alfajor', function (Blueprint $table) {
             $table->increments('id');
+            $table->text('nombre')->nullable();
+            $table->text('sabor')->nullable();
+            $table->decimal('precio', 8, 2);
             $table->timestamps();
         });
     }
