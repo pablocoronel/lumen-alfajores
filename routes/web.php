@@ -14,3 +14,12 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+/**
+ * Routes for resource alfajor
+ */
+$router->get('alfajor', 'AlfajorsController@all');
+$router->get('alfajor/{id}', 'AlfajorsController@get');
+$router->post('alfajor', 'AlfajorsController@add');
+$router->put('alfajor/{id}', 'AlfajorsController@put');
+$router->delete('alfajor/{id}', 'AlfajorsController@remove');
