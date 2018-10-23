@@ -24,7 +24,6 @@ class Alfajor extends Model
      */
     public static $rules = [
         // Validation rules
-        'id' => 'required|integer',
         'nombre' => 'required|string',
         'sabor' => 'required|string',
         'precio' => 'required|numeric'
