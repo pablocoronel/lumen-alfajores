@@ -1,9 +1,20 @@
-<?php namespace App\Http\Controllers;
+<?php
+namespace App\Http\Controllers;
 
-class AlfajorsController extends Controller {
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
+class AlfajorsController extends Controller
+{
     const MODEL = "App\Alfajor";
 
     use RESTActions;
 
+    /**
+     * @param Request $request
+     */
+    public function imagenUpload(Request $request)
+    {
+        dd($request);
+    }
 }
