@@ -17,9 +17,9 @@ class AlfajorsController extends Controller
      */
     public function imagenUpload(Request $request)
     {
-        dd($request->all());
+        dd($request->imagen);
         // if ($request->hasFile('imagen')) {
-        //     dd('s');
+            // dd('s');
         //     // $file = $request->imagen;
         //     // $fileData = \File::get($file->path());
 
@@ -29,7 +29,7 @@ class AlfajorsController extends Controller
 
         //     // return response()->json(Response::HTTP_OK);
         // } else {
-        //     dd('f');
+            // dd('f');
         //     // return response()->json(Response::HTTP_NOT_FOUND);
         // }
 
