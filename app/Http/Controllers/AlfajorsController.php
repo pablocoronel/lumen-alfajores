@@ -1,8 +1,6 @@
 <?php
 namespace App\Http\Controllers;
 
-header('Access-Control-Allow-Origin: *');
-
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -17,21 +15,20 @@ class AlfajorsController extends Controller
      */
     public function imagenUpload(Request $request)
     {
-        dd($request->imagen);
-        // if ($request->hasFile('imagen')) {
-            // dd('s');
-        //     // $file = $request->imagen;
-        //     // $fileData = \File::get($file->path());
+        if ($request->hasFile('imagen')) {
+            if ($request->file('imagen')->isValid()) {
+                $file      = $request->imagen;
+                $fileName  = base_convert(time(), 10, 36) . '.' . $file->guessExtension();
+                $finalPath = storage_path('app/public');
 
-        //     // $fileName   = $this->createFilename($file);
-        //     // $finalPath = public_path("/");
-        //     // $request->file('imagen')->move($finalPath, $fileName);
+                $request->file('imagen')->move($finalPath, $fileName);
 
-        //     // return response()->json(Response::HTTP_OK);
-        // } else {
-            // dd('f');
-        //     // return response()->json(Response::HTTP_NOT_FOUND);
-        // }
+                return response()->json(Response::HTTP_OK);
+            }
+
+        } else {
+            return response()->json(Response::HTTP_NOT_FOUND);
+        }
 
     }
 
