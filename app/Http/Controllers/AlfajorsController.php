@@ -48,4 +48,12 @@ class AlfajorsController extends Controller
 
     }
 
+    /**
+     * @param int $id
+     */
+    public function getImage($id)
+    {
+        return $imagenes = Imagen::where('alfajor_id', '=', $id)->get();
+    }
+
 }
