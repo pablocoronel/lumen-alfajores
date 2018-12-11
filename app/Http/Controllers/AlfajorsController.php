@@ -17,7 +17,8 @@ class AlfajorsController extends Controller
     public function imagenUpload(Request $request)
     {
         $idAlfajor = $request->idAlfajor;
-        $finalPath = storage_path('app/public');
+        // $finalPath = storage_path('app/public');
+        $folder = base_path('public/images');
 
         foreach ($request->imagen as $key => $cada_imagen) {
             if ($request->hasFile('imagen')) {
@@ -27,13 +28,12 @@ class AlfajorsController extends Controller
                     $name      = $idAlfajor . '_' . $key . '_' . base_convert(time(), 10, 36);
                     $extension = $file->guessExtension();
                     $fileName  = $name . '.' . $extension;
+                    $path      = 'images/' . $fileName;
 
-                    $guardado = $cada_imagen->move($finalPath, $fileName);
+                    $guardado = $cada_imagen->move($folder, $fileName);
 
                     if (! is_null($guardado)) {
-                        $ruta = $fileName;
-
-                        Imagen::create(['file_path' => $ruta, 'alfajor_id' => $idAlfajor]);
+                        Imagen::create(['file_path' => $path, 'alfajor_id' => $idAlfajor]);
                     }
 
                 }
@@ -53,6 +53,14 @@ class AlfajorsController extends Controller
      */
     public function getImage($id)
     {
+// $name    = Imagen::where('alfajor_id', '=', $id)->get()->first()->file_path;
+
+// $path    = storage_path('app/public/') . Imagen::where('alfajor_id', '=', $id)->get()->first()->file_path;
+
+// $headers = array('Content-Type' => 'image/jpeg', 'Access-Control-Allow-Origin' => '*');
+
+        // return response()->download($path, $name, $headers);
+
         return $imagenes = Imagen::where('alfajor_id', '=', $id)->get();
     }
 

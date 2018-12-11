@@ -27,3 +27,4 @@ $router->delete('alfajor/{id}', 'AlfajorsController@remove');
 // Subir imagen
 $router->post('imagenUpload', 'AlfajorsController@imagenUpload');
 $router->get('getImage/{id}', 'AlfajorsController@getImage');
+
