@@ -20,26 +20,29 @@ class AlfajorsController extends Controller
         // $finalPath = storage_path('app/public');
         $folder = base_path('public/images');
 
-        foreach ($request->imagen as $key => $cada_imagen) {
-            if ($request->hasFile('imagen')) {
-                if ($cada_imagen->isValid()) {
-                    $file = $cada_imagen;
+        if (isset($request->imagen) && count($request->imagen) > 0) {
+            foreach ($request->imagen as $key => $cada_imagen) {
+                if ($request->hasFile('imagen')) {
+                    if ($cada_imagen->isValid()) {
+                        $file = $cada_imagen;
 
-                    $name      = $idAlfajor . '_' . $key . '_' . base_convert(time(), 10, 36);
-                    $extension = $file->guessExtension();
-                    $fileName  = $name . '.' . $extension;
-                    $path      = 'images/' . $fileName;
+                        $name      = $idAlfajor . '_' . $key . '_' . base_convert(time(), 10, 36);
+                        $extension = $file->guessExtension();
+                        $fileName  = $name . '.' . $extension;
+                        $path      = 'images/' . $fileName;
 
-                    $guardado = $cada_imagen->move($folder, $fileName);
+                        $guardado = $cada_imagen->move($folder, $fileName);
 
-                    if (! is_null($guardado)) {
-                        Imagen::create(['file_path' => $path, 'alfajor_id' => $idAlfajor]);
+                        if (! is_null($guardado)) {
+                            Imagen::create(['file_path' => $path, 'alfajor_id' => $idAlfajor]);
+                        }
+
                     }
 
+                } else {
+                    return response()->json(Response::HTTP_NOT_FOUND);
                 }
 
-            } else {
-                return response()->json(Response::HTTP_NOT_FOUND);
             }
 
         }
